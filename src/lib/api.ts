@@ -41,7 +41,7 @@ export type ApiEntity = {
   updatedAt?: string;
 };
 
-export type ApiBlog = ApiEntity & { points?: string[]; image?: string };
+export type ApiBlog = ApiEntity & { points?: string[]; image?: string; body?: string };
 export type ApiProject = ApiEntity & { submissions?: number; image?: string; body?: string; metric?: string; tag?: string };
 export type ApiService = ApiEntity & { body?: string; points?: string[]; image?: string };
 export type ApiProduct = ApiEntity & { body?: string; points?: string[]; image?: string; amount?: string };
@@ -154,4 +154,18 @@ export function slugify(value: string): string {
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * Turns an image value coming from the Admin Panel into a URL the browser can
+ * load. Absolute URLs and data URIs pass through; relative paths (e.g.
+ * "/uploads/x.png" or "uploads/x.png") are resolved against the backend origin.
+ */
+export function mediaUrl(value?: string | null): string | undefined {
+  const src = (value ?? "").trim();
+  if (!src) return undefined;
+  if (/^(https?:)?\/\//i.test(src) || src.startsWith("data:") || src.startsWith("blob:")) {
+    return src;
+  }
+  return `${API_URL}/${src.replace(/^\/+/, "")}`;
 }

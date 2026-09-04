@@ -3,7 +3,6 @@ import { ArrowRight, Cpu, Boxes, ShieldCheck, Rocket, Sparkles, LineChart } from
 import heroPortal from "@/assets/hero-core.jpeg.asset.json";
 import { Mascot } from "@/components/site/Mascot";
 import { ProcessStrip } from "@/components/site/ProcessStrip";
-import { OrbitShowcase } from "@/components/site/OrbitShowcase";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/Section";
 
@@ -113,9 +112,8 @@ function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={140} className="flex justify-center">
-            <OrbitShowcase size={420} />
-          </Reveal>
+          {/* right-side visual: the hero artwork itself, no overlaid labels or logo */}
+          <div aria-hidden="true" className="hidden md:block md:min-h-[420px]" />
         </div>
 
         <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-4 px-5 pb-16 md:grid-cols-4">

@@ -14,6 +14,7 @@ import { PageHero, SectionHeading } from "@/components/site/Section";
 import { Reveal } from "@/components/site/Reveal";
 import { cn } from "@/lib/utils";
 import { useProducts } from "@/hooks/useTevexxoApi";
+import { mediaUrl } from "@/lib/api";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -108,6 +109,14 @@ function Products() {
                       large && "lg:p-8",
                     )}
                   >
+                    {mediaUrl(p.image) && (
+                      <img
+                        src={mediaUrl(p.image)}
+                        alt={p.name}
+                        loading="lazy"
+                        className="mb-5 -mx-6 -mt-6 aspect-[16/9] w-[calc(100%+3rem)] border-b border-border object-cover lg:-mx-8 lg:-mt-8 lg:w-[calc(100%+4rem)]"
+                      />
+                    )}
                     <div className="flex items-center justify-between">
                       <span className="grid size-12 place-items-center rounded-lg bg-primary/15 text-primary">
                         <Icon className="size-6" />
@@ -124,9 +133,14 @@ function Products() {
                         {p.amount}
                       </span>
                     )}
-                    <p className={cn("mt-3 text-muted-foreground", large && "lg:text-lg")}>
-                      {p.body || p.detail || fallbackBody}
+                    <p className={cn("mt-3 flex-1 text-muted-foreground", large && "lg:text-lg")}>
+                      {p.detail || p.body || fallbackBody}
                     </p>
+                    {p.status && (
+                      <span className="mt-3 inline-flex w-fit items-center gap-2 text-xs font-bold uppercase tracking-wide text-primary">
+                        {p.status}
+                      </span>
+                    )}
                     <Link
                       to="/contact"
                       className="glow-btn mt-6 inline-flex w-fit items-center gap-2 rounded-md border border-border px-5 py-2 text-sm font-bold tracking-wide uppercase hover:border-primary hover:text-primary"
