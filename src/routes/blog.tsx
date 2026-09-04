@@ -6,6 +6,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Mascot } from "@/components/site/Mascot";
 import { cn } from "@/lib/utils";
 import { useBlogs } from "@/hooks/useTevexxoApi";
+import { mediaUrl } from "@/lib/api";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -124,12 +125,21 @@ function Blog() {
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filtered.map((p, i) => (
               <Reveal key={p.id} delay={i * 70}>
-                <article className="glow-card flex h-full cursor-pointer flex-col rounded-xl border border-border bg-card p-6">
+                <article className="glow-card flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-border bg-card">
+                  {mediaUrl(p.image) && (
+                    <img
+                      src={mediaUrl(p.image)}
+                      alt={p.name}
+                      loading="lazy"
+                      className="aspect-[16/9] w-full border-b border-border object-cover"
+                    />
+                  )}
+                  <div className="flex flex-1 flex-col p-6">
                   <span className="w-fit rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-bold tracking-widest uppercase text-primary">
                     {p.category || "Insight"}
                   </span>
                   <h2 className="mt-4 text-xl font-bold leading-snug">{p.name}</h2>
-                  <p className="mt-3 flex-1 text-muted-foreground">{p.detail}</p>
+                  <p className="mt-3 flex-1 text-muted-foreground">{p.detail || p.body}</p>
                   <div className="mt-6 flex items-center gap-4 text-sm text-muted-foreground">
                     {p.date && (
                       <span className="inline-flex items-center gap-1.5">
@@ -141,6 +151,7 @@ function Blog() {
                         <Clock className="size-4" /> {formatDate(p.createdAt)}
                       </span>
                     )}
+                  </div>
                   </div>
                 </article>
               </Reveal>

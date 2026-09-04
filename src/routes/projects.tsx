@@ -6,6 +6,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Mascot } from "@/components/site/Mascot";
 import { cn } from "@/lib/utils";
 import { useProjects } from "@/hooks/useTevexxoApi";
+import { mediaUrl } from "@/lib/api";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -125,7 +126,16 @@ function Projects() {
               const metric = p.metric || categoryMetrics[cat] || "Case study available";
               return (
                 <Reveal key={p.id} delay={i * 80}>
-                  <article className="glow-card group h-full rounded-xl border border-border bg-card p-6">
+                  <article className="glow-card group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card">
+                    {mediaUrl(p.image) && (
+                      <img
+                        src={mediaUrl(p.image)}
+                        alt={title || "Project"}
+                        loading="lazy"
+                        className="aspect-[16/9] w-full border-b border-border object-cover"
+                      />
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
                     <div className="flex items-center justify-between">
                       <span className="rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-bold tracking-widest uppercase text-primary">
                         {cat}
@@ -138,8 +148,11 @@ function Projects() {
                         {p.tag}
                       </p>
                     )}
-                    <p className="mt-4 text-muted-foreground">{body}</p>
+                    <p className="mt-4 flex-1 text-muted-foreground">
+                      {body || "Case details coming soon."}
+                    </p>
                     <p className="mt-6 font-display text-lg font-bold text-primary">{metric}</p>
+                    </div>
                   </article>
                 </Reveal>
               );
