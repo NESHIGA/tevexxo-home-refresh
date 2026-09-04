@@ -32,6 +32,7 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
   --color-surface: var(--surface);
+  --color-stat-muted: var(--stat-muted);
   --color-glow: var(--glow);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -66,6 +67,8 @@
   --secondary-foreground: oklch(0.97 0.005 80);
   --muted: oklch(0.26 0.016 55);
   --muted-foreground: oklch(0.72 0.015 70);
+  /* subtle dark / muted off-white used by the home stat labels */
+  --stat-muted: oklch(0.63 0.012 70);
   --accent: oklch(0.72 0.19 48);
   --accent-foreground: oklch(0.16 0.012 60);
   --destructive: oklch(0.62 0.22 25);

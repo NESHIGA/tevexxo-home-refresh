@@ -122,7 +122,7 @@ function Home() {
           {stats.map((s, i) => (
             <Reveal key={s.v} delay={i * 80}>
               <div className="glow-card rounded-xl border border-border bg-card/70 p-5 text-center backdrop-blur">
-                <p className="font-display text-2xl font-bold text-stat">{s.k}</p>
+                <p className="font-display text-2xl font-bold text-primary">{s.k}</p>
                 <p className="mt-1 text-sm text-stat-muted uppercase tracking-wide">{s.v}</p>
               </div>
             </Reveal>
