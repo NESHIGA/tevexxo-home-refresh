@@ -21,17 +21,19 @@ const steps = [
 export function ProcessStrip() {
   return (
     <div className="relative">
-      <style>{`@keyframes tvx-pulse-x { from { left: -12%; } to { left: 104%; } }`}</style>
+      <style>{`@keyframes tvx-pulse-x { from { transform: translate3d(-100%, 0, 0); } to { transform: translate3d(100%, 0, 0); } }`}</style>
       <div className="overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <div className="relative mx-auto flex min-w-[720px] max-w-4xl items-start justify-between">
-          {/* connecting line with travelling pulse */}
+          {/* connecting line with a straight left-to-right travelling pulse */}
           <div
             aria-hidden="true"
-            className="absolute top-8 h-px bg-primary/25"
+            className="absolute top-8 h-px overflow-hidden bg-primary/25"
             style={{ left: "calc(100% / 14)", right: "calc(100% / 14)" }}
           >
-            <div className="absolute -top-[3px] h-[7px] w-20 rounded-full bg-gradient-to-r from-transparent via-primary to-transparent blur-[1px] animate-[tvx-pulse-x_3.2s_linear_infinite]" />
-            <div className="absolute -top-px h-[3px] w-10 rounded-full bg-gradient-to-r from-transparent via-glow to-transparent animate-[tvx-pulse-x_3.2s_linear_infinite]" />
+            <div className="absolute inset-y-0 left-0 w-full will-change-transform animate-[tvx-pulse-x_3.2s_linear_infinite]">
+              <div className="absolute top-1/2 left-1/2 h-px w-24 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-primary to-transparent" />
+              <div className="absolute top-1/2 left-1/2 h-px w-10 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-glow to-transparent" />
+            </div>
           </div>
 
           {steps.map((s) => (
