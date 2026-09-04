@@ -18,41 +18,56 @@ const steps = [
   { icon: Headphones, label: "Support" },
 ];
 
-export function ProcessStrip() {
+function StepRow({ ariaHidden = false }: { ariaHidden?: boolean }) {
   return (
-    <div className="relative">
-      <style>{`@keyframes tvx-pulse-x { from { transform: translate3d(-100%, 0, 0); } to { transform: translate3d(100%, 0, 0); } }`}</style>
-      <div className="overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div className="relative mx-auto flex min-w-[720px] max-w-4xl items-start justify-between">
-          {/* connecting line with a straight left-to-right travelling pulse */}
-          <div
+    <div
+      className="flex shrink-0 items-start"
+      {...(ariaHidden ? { "aria-hidden": "true" } : {})}
+    >
+      {steps.map((s) => (
+        <div
+          key={s.label}
+          className="relative flex w-28 flex-col items-center gap-3 sm:w-36 md:w-40"
+        >
+          {/* straight connecting line behind the icons */}
+          <span
             aria-hidden="true"
-            className="absolute top-8 h-px overflow-hidden bg-primary/25"
-            style={{ left: "calc(100% / 14)", right: "calc(100% / 14)" }}
-          >
-            <div className="absolute inset-y-0 left-0 w-full will-change-transform animate-[tvx-pulse-x_3.2s_linear_infinite]">
-              <div className="absolute top-1/2 left-1/2 h-px w-24 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-primary to-transparent" />
-              <div className="absolute top-1/2 left-1/2 h-px w-10 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-glow to-transparent" />
+            className="absolute top-8 left-0 h-px w-full bg-primary/25"
+          />
+          <div className="hex-clip relative z-10 grid size-14 place-items-center bg-primary/70 p-[1.5px] sm:size-16">
+            <div className="hex-clip grid size-full place-items-center bg-background">
+              <s.icon className="size-5 text-primary sm:size-6" />
             </div>
           </div>
-
-          {steps.map((s) => (
-            <div
-              key={s.label}
-              className="relative z-10 flex flex-col items-center gap-3"
-              style={{ width: "calc(100% / 7)" }}
-            >
-              <div className="hex-clip grid size-16 place-items-center bg-primary/70 p-[1.5px]">
-                <div className="hex-clip grid size-full place-items-center bg-background">
-                  <s.icon className="size-6 text-primary" />
-                </div>
-              </div>
-              <span className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
-                {s.label}
-              </span>
-            </div>
-          ))}
+          <span className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+            {s.label}
+          </span>
         </div>
+      ))}
+    </div>
+  );
+}
+
+export function ProcessStrip() {
+  return (
+    <div className="relative w-full overflow-hidden">
+      <style>{`@keyframes tvx-marquee-x { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+      .tvx-marquee { animation: tvx-marquee-x 28s linear infinite; }
+      @media (prefers-reduced-motion: reduce) { .tvx-marquee { animation: none; } }`}</style>
+
+      {/* soft edge fades so the loop never shows a hard seam */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 z-20 w-12 bg-gradient-to-r from-background to-transparent sm:w-20"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 z-20 w-12 bg-gradient-to-l from-background to-transparent sm:w-20"
+      />
+
+      <div className="tvx-marquee flex w-max will-change-transform">
+        <StepRow />
+        <StepRow ariaHidden />
       </div>
     </div>
   );
