@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Cpu, Boxes, ShieldCheck, Rocket, Sparkles, LineChart } from "lucide-react";
-import heroPortal from "@/assets/hero-core.jpeg.asset.json";
+import heroOrbit from "@/assets/hero-orbit.png.asset.json";
 import { Mascot } from "@/components/site/Mascot";
 import { ProcessStrip } from "@/components/site/ProcessStrip";
 import { Reveal } from "@/components/site/Reveal";
