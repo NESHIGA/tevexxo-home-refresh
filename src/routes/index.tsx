@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Cpu, Boxes, ShieldCheck, Rocket, Sparkles, LineChart } from "lucide-react";
-import heroPortal from "@/assets/hero-portal.jpeg.asset.json";
+import heroPortal from "@/assets/hero-core.jpeg.asset.json";
 import { Mascot } from "@/components/site/Mascot";
 import { ProcessStrip } from "@/components/site/ProcessStrip";
 import { OrbitShowcase } from "@/components/site/OrbitShowcase";
@@ -122,8 +122,8 @@ function Home() {
           {stats.map((s, i) => (
             <Reveal key={s.v} delay={i * 80}>
               <div className="glow-card rounded-xl border border-border bg-card/70 p-5 text-center backdrop-blur">
-                <p className="font-display text-2xl font-bold text-primary">{s.k}</p>
-                <p className="mt-1 text-sm text-muted-foreground uppercase tracking-wide">{s.v}</p>
+                <p className="font-display text-2xl font-bold text-stat">{s.k}</p>
+                <p className="mt-1 text-sm text-stat-muted uppercase tracking-wide">{s.v}</p>
               </div>
             </Reveal>
           ))}
