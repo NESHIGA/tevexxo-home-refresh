@@ -155,3 +155,17 @@ export function slugify(value: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+
+/**
+ * Turns an image value coming from the Admin Panel into a URL the browser can
+ * load. Absolute URLs and data URIs pass through; relative paths (e.g.
+ * "/uploads/x.png" or "uploads/x.png") are resolved against the backend origin.
+ */
+export function mediaUrl(value?: string | null): string | undefined {
+  const src = (value ?? "").trim();
+  if (!src) return undefined;
+  if (/^(https?:)?\/\//i.test(src) || src.startsWith("data:") || src.startsWith("blob:")) {
+    return src;
+  }
+  return `${API_URL}/${src.replace(/^\/+/, "")}`;
+}
