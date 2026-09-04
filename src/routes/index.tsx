@@ -66,24 +66,11 @@ function Home() {
   return (
     <>
       <section className="relative overflow-hidden">
-        <img
-          src={heroPortal.url}
-          alt=""
-          aria-hidden="true"
-          width={1920}
-          height={1080}
-          className="absolute inset-0 size-full object-cover object-center opacity-50 md:opacity-75"
-        />
         <div className="grid-circuit pointer-events-none absolute inset-0" />
-        {/* edge fade so the image melts into the page background */}
         <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 62% 58% at 50% 42%, transparent 25%, var(--background) 96%)",
-          }}
+          className="pointer-events-none absolute -top-40 left-1/4 size-[34rem] -translate-x-1/2 rounded-full blur-3xl opacity-20"
+          style={{ background: "radial-gradient(circle, var(--primary), transparent 65%)" }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/80 via-background/20 to-background" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1 text-xs font-bold tracking-[0.2em] uppercase text-primary">
@@ -112,8 +99,18 @@ function Home() {
             </div>
           </Reveal>
 
-          {/* right-side visual: the hero artwork itself, no overlaid labels or logo */}
-          <div aria-hidden="true" className="hidden md:block md:min-h-[420px]" />
+          {/* right-side visual: medium hero artwork, no overlaid labels or logo */}
+          <Reveal delay={120} className="flex justify-center md:justify-end">
+            <div className="glow-card relative w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur">
+              <img
+                src={heroPortal.url}
+                alt="Tevexxo futuristic engineering visual"
+                width={1024}
+                height={1024}
+                className="aspect-square w-full object-cover"
+              />
+            </div>
+          </Reveal>
         </div>
 
         <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-4 px-5 pb-16 md:grid-cols-4">
