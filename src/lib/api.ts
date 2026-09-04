@@ -41,7 +41,7 @@ export type ApiEntity = {
   updatedAt?: string;
 };
 
-export type ApiBlog = ApiEntity & { points?: string[]; image?: string };
+export type ApiBlog = ApiEntity & { points?: string[]; image?: string; body?: string };
 export type ApiProject = ApiEntity & { submissions?: number; image?: string; body?: string; metric?: string; tag?: string };
 export type ApiService = ApiEntity & { body?: string; points?: string[]; image?: string };
 export type ApiProduct = ApiEntity & { body?: string; points?: string[]; image?: string; amount?: string };
