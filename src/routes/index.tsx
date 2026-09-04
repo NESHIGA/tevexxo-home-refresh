@@ -103,7 +103,7 @@ function Home() {
           <Reveal delay={120} className="flex justify-center md:justify-end">
             <div className="glow-card relative w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur">
               <img
-                src={heroPortal.url}
+                src={heroOrbit.url}
                 alt="Tevexxo futuristic engineering visual"
                 width={1024}
                 height={1024}
